@@ -1,6 +1,6 @@
 # PayloadCMS Docker Setup
 
-A complete Docker Compose setup for PayloadCMS with MongoDB database, featuring automatic project initialization and development workflow.
+A complete Docker Compose setup for [PayloadCMS](https://github.com/payloadcms/payload) with MongoDB database, featuring automatic project initialization and development workflow.
 
 ##  Quick Start
 
