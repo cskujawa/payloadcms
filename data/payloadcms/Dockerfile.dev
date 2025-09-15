@@ -1,0 +1,30 @@
+# PayloadCMS Development Dockerfile
+FROM node:18-alpine
+
+# Install dependencies for PayloadCMS
+RUN apk add --no-cache libc6-compat su-exec
+
+# Set working directory
+WORKDIR /app
+
+# The node user already exists in the base image, just ensure proper permissions
+
+# Copy entrypoint script
+COPY docker-entrypoint.dev.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
+
+# Create media directory for uploads
+RUN mkdir -p media && chown -R node:node media
+
+# Set environment variables
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Start as root to allow corepack setup, entrypoint will switch to node user
+# USER node
+
+# Expose port
+EXPOSE 3000
+
+# Use entrypoint script
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
